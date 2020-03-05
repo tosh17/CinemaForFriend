@@ -4,7 +4,6 @@ import android.os.Bundle
 import io.reactivex.functions.Consumer
 import kotlinx.android.synthetic.main.activity_login.*
 import org.koin.android.ext.android.get
-import org.koin.java.KoinJavaComponent.get
 import ru.thstrio.cinemaforfriend.R
 import ru.thstrio.cinemaforfriend.ui.login.mvi.event.LoginUIEvent
 import ru.thstrio.cinemaforfriend.ui.login.mvi.event.LoginUIEvent.SelectSingIn
@@ -32,26 +31,18 @@ class LoginActivity : ObservableSourceActivity<LoginUIEvent>(),
     override fun accept(model: LoginViewModel?) {
         model?.let {
             if (login_btn_sign_in.tag != model.isModeSignIn) {
-                login_btn_sign_in.tag == model.isModeSignIn
+                login_btn_sign_in.tag = model.isModeSignIn
                 changeMode(model.isModeSignIn)
             }
         }
     }
 
     private fun changeMode(modeSignIn: Boolean) {
-        login_btn_sign_in.setTextColor(
-            getSelectColor(
-                modeSignIn,
-                R.color.link_active,
-                R.color.link_notactive
-            )
-        )
-        login_btn_sign_up.setTextColor(
-            getSelectColor(
-                !modeSignIn,
-                R.color.link_active,
-                R.color.link_notactive
-            )
-        )
+        login_btn_sign_in.setTextColor(getTextColor(modeSignIn) )
+        login_btn_sign_up.setTextColor(getTextColor(!modeSignIn))
     }
+
+    private fun getTextColor(isActive: Boolean) = getSelectColor(
+        isActive, R.color.link_active, R.color.link_notactive
+    )
 }
