@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "624097894880",
+    "firebase_url": "https://cinemaforfriend.firebaseio.com",
+    "project_id": "cinemaforfriend",
+    "storage_bucket": "cinemaforfriend.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:624097894880:android:4a7ded1559cdf293d60b85",
+        "android_client_info": {
+          "package_name": "ru.thstrio.cinemaforfriend"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "624097894880-8e5jilamkuiu42pds2fgid49bbto4vej.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ru.thstrio.cinemaforfriend",
+            "certificate_hash": "df19698d6e3fce470f6b527bb6befed05c1f294d"
+          }
+        },
+        {
+          "client_id": "624097894880-lti93egg490ob1u0e94ftmh3idgqcifq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAdOeTihjENqQ0B-tIaVI49U5sv37A0GRc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "624097894880-lti93egg490ob1u0e94ftmh3idgqcifq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

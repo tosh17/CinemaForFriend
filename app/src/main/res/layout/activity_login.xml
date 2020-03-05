@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.login.LoginActivity"
+    android:focusable="true">
+
+    <ImageView
+        android:id="@+id/login_image_logo"
+        android:layout_width="0dp"
+        android:layout_height="250dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginEnd="64dp"
+        android:layout_marginBottom="8dp"
+        android:src="@drawable/logo"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.1" />
+
+    <TextView
+        android:id="@+id/login_btn_sign_in"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="Войти"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="@+id/login_image_logo"
+        app:layout_constraintTop_toBottomOf="@+id/login_image_logo" />
+
+    <TextView
+        android:id="@+id/login_btn_sign_up"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:text="Регистрация"
+        android:textColor="#4C4C4C"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="@+id/login_image_logo"
+        app:layout_constraintTop_toBottomOf="@+id/login_image_logo" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/login_text_input_layout_login"
+        style="@style/TextInputLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="64dp"
+        android:hint="Логин или почта "
+        app:layout_constraintEnd_toEndOf="@+id/login_image_logo"
+        app:layout_constraintStart_toStartOf="@+id/login_image_logo"
+        app:layout_constraintTop_toBottomOf="@+id/login_btn_sign_in">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/login_text_input_layout_password1"
+        style="@style/TextInputLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="64dp"
+        android:hint="Пароль"
+        app:layout_constraintEnd_toEndOf="@+id/login_image_logo"
+        app:layout_constraintStart_toStartOf="@+id/login_image_logo"
+        app:layout_constraintTop_toBottomOf="@+id/login_text_input_layout_login">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/materialButton"
+        style="@style/Widget.MaterialComponents.Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minWidth="200dp"
+        android:text="Войти"
+        app:backgroundTint="@color/colorPrimaryDark"
+        app:cornerRadius="16dp"
+        app:icon="@android:drawable/ic_dialog_email"
+        app:iconPadding="-12dp"
+        app:layout_constraintStart_toStartOf="@+id/login_text_input_layout_password1"
+        app:layout_constraintTop_toBottomOf="@+id/login_text_input_layout_password1" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="24dp"
+        android:src="@drawable/btn_facebook"
+        app:layout_constraintEnd_toStartOf="@+id/imageView3"
+        app:layout_constraintTop_toBottomOf="@+id/materialButton" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginTop="24dp"
+        android:src="@drawable/btn_google"
+        app:layout_constraintEnd_toEndOf="@+id/login_text_input_layout_password1"
+        app:layout_constraintTop_toBottomOf="@+id/materialButton" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:textSize="18sp"
+        android:text="Войти через"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView2"
+        app:layout_constraintStart_toStartOf="@+id/materialButton" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
