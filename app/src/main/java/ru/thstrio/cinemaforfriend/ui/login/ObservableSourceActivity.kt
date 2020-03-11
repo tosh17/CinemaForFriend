@@ -16,4 +16,6 @@ abstract class ObservableSourceActivity<T> : AppCompatActivity(), ObservableSour
     override fun subscribe(observer: Observer<in T>) {
         source.subscribe(observer)
     }
+
+
 }

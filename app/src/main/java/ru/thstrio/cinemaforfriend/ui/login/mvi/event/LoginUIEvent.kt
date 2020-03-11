@@ -1,10 +1,14 @@
 package ru.thstrio.cinemaforfriend.ui.login.mvi.event
 
-sealed class LoginUIEvent {
-    object SelectSingIn : LoginUIEvent()
-    object SelectSingUp : LoginUIEvent()
-   // data class EnterLogin(val text: String) : LoginUIEvent()
-  //  object Enter : LoginUIEvent()
-   // object EnterGoogle : LoginUIEvent()
-   // object EnterFacebook : LoginUIEvent()
+interface LoginUIEvent
+sealed class SimpleLoginUIEvent : LoginUIEvent {
+    object SelectSingIn : SimpleLoginUIEvent()
+    object SelectSingUp : SimpleLoginUIEvent()
+}
+
+sealed class ActorLoginUIEvent : LoginUIEvent {
+    object CreateUserEmail : ActorLoginUIEvent()
+    object LoginByGoogle : ActorLoginUIEvent()
+
+
 }

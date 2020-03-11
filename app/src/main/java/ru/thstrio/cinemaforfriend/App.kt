@@ -7,6 +7,7 @@ import ru.terrakok.cicerone.Cicerone
 import ru.terrakok.cicerone.NavigatorHolder
 import ru.terrakok.cicerone.Router
 import ru.thstrio.cinemaforfriend.di.coin.appModule
+import ru.thstrio.cinemaforfriend.di.coin.firebaseModule
 import ru.thstrio.cinemaforfriend.di.coin.navigationModule
 
 
@@ -26,7 +27,7 @@ class App : Application() {
     private fun koin() {
         startKoin {
             androidContext(this@App)
-            modules(listOf(appModule, navigationModule))
+            modules(listOf(appModule, navigationModule, firebaseModule))
         }
     }
 
