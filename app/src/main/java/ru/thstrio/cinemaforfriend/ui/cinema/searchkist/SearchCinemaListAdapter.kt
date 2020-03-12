@@ -30,7 +30,7 @@ class SearchCinemaListAdapter(diffCallback: DiffUtil.ItemCallback<CinemaPojo>) :
                     setLogoError()
                 }
                 setDescription(item.overview)
-                setRate("${item.voteCount}\\${item.voteAverage}")
+                setRate("${item.voteAverage}/${item.voteCount}")
             }
         }
 
