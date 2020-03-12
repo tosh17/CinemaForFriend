@@ -1,72 +1,87 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<FrameLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+   >
 
-    <ImageView
-        android:id="@+id/search_cinema_item_logo"
-        android:layout_width="96dp"
-        android:layout_height="96dp"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_launcher_foreground" />
-
-    <TextView
-        android:id="@+id/search_cinema_item_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        tools:text="Собачье сердце"
-        app:layout_constraintStart_toEndOf="@+id/search_cinema_item_logo"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/search_cinema_item_description"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
         android:layout_marginEnd="8dp"
-        tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque consequat augue eget fringilla porttitor. Curabitur a justo in tellus congue efficitur vitae id metus. Maecenas ut diam a libero luctus dictum. Proin vel magna justo. Suspendisse potenti. Quisque et ipsum ut ligula vestibulum blandit. Pellentesque in rutrum metus. Nam feugiat lorem et nisl rhoncus, quis rhoncus erat dignissim. Sed eu nisi urna. Morbi ac mattis lectus. Vestibulum volutpat rhoncus ex, a hendrerit libero pellentesque molestie. Cras sollicitudin sapien vitae massa venenatis fermentum. Sed maximus tincidunt sem vitae dignissim. Sed et viverra dui. Mauris nec quam convallis, tempus turpis id, aliquam odio."
-        app:layout_constraintEnd_toEndOf="parent"
-        android:maxLines="3"
-        app:layout_constraintStart_toStartOf="@+id/search_cinema_item_title"
-        app:layout_constraintTop_toBottomOf="@+id/search_cinema_item_title" />
+        android:elevation="7dp">
 
-    <TextView
-        android:id="@+id/search_cinema_item_ganr"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:text="комедия, семейный"
-        app:layout_constraintBottom_toBottomOf="@+id/search_cinema_item_logo"
-        app:layout_constraintStart_toStartOf="@+id/search_cinema_item_description" />
+        <ImageView
+            android:id="@+id/search_cinema_item_logo"
+            android:layout_width="96dp"
+            android:layout_height="96dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_launcher_foreground" />
 
-    <TextView
-        android:id="@+id/search_cinema_item_rate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="100dp"
-        android:layout_marginEnd="8dp"
-        tools:text="4.7"
-        app:layout_constraintBottom_toBottomOf="@+id/search_cinema_item_ganr"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/search_cinema_item_ganr"
-        app:layout_constraintTop_toTopOf="@+id/search_cinema_item_ganr" />
+        <TextView
+            android:id="@+id/search_cinema_item_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/search_cinema_item_logo"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Собачье сердце" />
 
-    <ImageView
-        android:id="@+id/search_cinema_item_separator"
-        android:layout_width="0dp"
-        android:layout_height="1dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/search_cinema_item_logo"
-        app:srcCompat="@color/colorPrimaryDark" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/search_cinema_item_description"
+            android:layout_width="0dp"
+            android:layout_height="52dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="8dp"
+            android:maxLines="3"
+            app:layout_constraintBottom_toBottomOf="@+id/search_cinema_item_logo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/search_cinema_item_title"
+            app:layout_constraintTop_toBottomOf="@+id/search_cinema_item_title"
+            app:layout_constraintVertical_bias="0.0"
+            tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque consequat augue eget fringilla porttitor. Curabitur a justo in tellus congue efficitur vitae id metus. Maecenas ut diam a libero luctus dictum. Proin vel magna justo. Suspendisse potenti. Quisque et ipsum ut ligula vestibulum blandit. Pellentesque in rutrum metus. Nam feugiat lorem et nisl rhoncus, quis rhoncus erat dignissim. Sed eu nisi urna. Morbi ac mattis lectus. Vestibulum volutpat rhoncus ex, a hendrerit libero pellentesque molestie. Cras sollicitudin sapien vitae massa venenatis fermentum. Sed maximus tincidunt sem vitae dignissim. Sed et viverra dui. Mauris nec quam convallis, tempus turpis id, aliquam odio." />
+
+        <TextView
+            android:id="@+id/search_cinema_item_ganr"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            app:layout_constraintBottom_toBottomOf="@+id/search_cinema_item_logo"
+            app:layout_constraintStart_toStartOf="@+id/search_cinema_item_description"
+            app:layout_constraintTop_toBottomOf="@+id/search_cinema_item_description"
+            app:layout_constraintVertical_bias="0.71000004"
+            tools:text="комедия, семейный" />
+
+        <TextView
+            android:id="@+id/search_cinema_item_rate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintBottom_toBottomOf="@+id/search_cinema_item_ganr"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/search_cinema_item_ganr"
+            tools:text="4.7" />
+
+        <ImageView
+            android:id="@+id/search_cinema_item_separator"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/search_cinema_item_ganr"
+            app:srcCompat="@color/colorPrimaryDark" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>

@@ -42,5 +42,5 @@ class CinemaPojo {
 
     @SerializedName("poster_path")
     @Expose
-    lateinit var posterPath: String
+    var posterPath: String?=""
 }
