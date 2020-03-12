@@ -71,7 +71,7 @@ class LoginActorFeature(
 
 
     class ActorImpl : Actor<State, Wish, Effect>, KoinComponent {
-        val auth: FAuth by inject<FAuth>()
+        val auth: FAuth by inject()
 
         override fun invoke(state: State, wish: Wish): Observable<Effect> = when (wish) {
             Wish.CreateEmailUser -> createUserByEmail(state.email, state.password1)
