@@ -12,11 +12,16 @@ import com.google.firebase.FirebaseException
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.PhoneAuthCredential
 import com.google.firebase.auth.PhoneAuthProvider
+import io.reactivex.Scheduler
+import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.functions.Consumer
+import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_login.*
 import org.koin.android.ext.android.get
 import ru.thstrio.cinemaforfriend.MainActivity
 import ru.thstrio.cinemaforfriend.R
+import ru.thstrio.cinemaforfriend.api.tmdb.pojo.ListCinemaPojo
+import ru.thstrio.cinemaforfriend.api.tmdb.service.TmdbServise
 import ru.thstrio.cinemaforfriend.firebase.auth.FAuth
 import ru.thstrio.cinemaforfriend.ui.login.mvi.event.ActorLoginUIEvent.*
 import ru.thstrio.cinemaforfriend.ui.login.mvi.event.LoginUIEvent
@@ -41,6 +46,17 @@ class LoginActivity : ObservableSourceActivity<LoginUIEvent>(),
         )
         setContentView(R.layout.activity_login)
         setupView()
+        test()
+
+    }
+
+    private fun test() {
+        val serv = TmdbServise.instance.createTmdbApi().fingCinema(cinema = "паразиты",page=2)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({ list ->
+                Log.d("Retrofit  pp", list.totalResults.toString()) },
+                { error -> Log.d("Retrofit", error.message) })
 
 
     }
