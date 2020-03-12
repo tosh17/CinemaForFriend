@@ -1,6 +1,7 @@
 package ru.thstrio.cinemaforfriend.ui.login.mvi.feature
 
 import android.os.Parcelable
+import android.util.Log
 import com.badoo.mvicore.feature.ActorReducerFeature
 import com.badoo.mvicore.element.TimeCapsule.*
 import com.badoo.mvicore.element.Actor
@@ -8,6 +9,8 @@ import com.badoo.mvicore.element.Bootstrapper
 import com.badoo.mvicore.element.NewsPublisher
 import com.badoo.mvicore.element.Reducer
 import com.badoo.mvicore.element.TimeCapsule
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount
+import com.google.firebase.auth.GoogleAuthProvider
 
 import ru.thstrio.cinemaforfriend.ui.login.mvi.feature.LoginActorFeature.Wish
 import ru.thstrio.cinemaforfriend.ui.login.mvi.feature.LoginActorFeature.State
@@ -18,6 +21,7 @@ import io.reactivex.Observable
 import io.reactivex.Observable.just
 import io.reactivex.android.schedulers.AndroidSchedulers
 import kotlinx.android.parcel.Parcelize
+import org.koin.android.ext.android.get
 
 import org.koin.core.KoinComponent
 import org.koin.core.inject
@@ -52,7 +56,7 @@ class LoginActorFeature(
 
     sealed class Wish {
         object CreateEmailUser : Wish()
-        object LoginByGoogle : Wish()
+        data class LoginByGoogle(val token: String?) : Wish()
     }
 
     sealed class Effect {
@@ -73,15 +77,18 @@ class LoginActorFeature(
             Wish.CreateEmailUser -> createUserByEmail(state.email, state.password1)
                 .map { Effect.CreateUserComplete as Effect }
                 .onErrorReturn { Effect.ErrorCreateUser(it) }
-            Wish.LoginByGoogle -> {
-                Observable.just(Effect.ErrorCreateUser(Throwable("ntcn")))
-            }
+            //todo change effect
+            is Wish.LoginByGoogle -> loginByGoogle(wish.token).map { Effect.CreateUserComplete as Effect }
+                .onErrorReturn { Effect.ErrorCreateUser(it) }
         }
 
-        fun createUserByEmail(email: String, password: String): Observable<Boolean> {
-            return auth.createUserFromEmail(email, password)
-                .observeOn(AndroidSchedulers.mainThread())
-        }
+        private fun loginByGoogle(token: String?) =
+            auth.loginByGoogle(token).observeOn(AndroidSchedulers.mainThread())
+
+
+        fun createUserByEmail(email: String, password: String) =
+            auth.createUserFromEmail(email, password).observeOn(AndroidSchedulers.mainThread())
+
     }
 
     class ReducerImpl : Reducer<State, Effect> {

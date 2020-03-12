@@ -17,8 +17,8 @@ class LoginUiEventTransformer2 : (LoginUIEvent) -> LoginActorFeature.Wish? {
     override fun invoke(event: LoginUIEvent): LoginActorFeature.Wish? {
         if (event !is ActorLoginUIEvent) return null
         return when (event) {
-             ActorLoginUIEvent.CreateUserEmail -> LoginActorFeature.Wish.CreateEmailUser
-            ActorLoginUIEvent.LoginByGoogle -> LoginActorFeature.Wish.LoginByGoogle
+            ActorLoginUIEvent.CreateUserEmail -> LoginActorFeature.Wish.CreateEmailUser
+            is ActorLoginUIEvent.LoginByGoogle -> LoginActorFeature.Wish.LoginByGoogle(event.token)
         }
     }
 }

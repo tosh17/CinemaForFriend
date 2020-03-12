@@ -3,8 +3,6 @@ package ru.thstrio.cinemaforfriend.ui.login
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.view.View
-import android.widget.Toast
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -28,8 +26,6 @@ import ru.thstrio.cinemaforfriend.ui.login.mvi.feature.LoginFeature
 import ru.thstrio.cinemaforfriend.ui.login.mvi.news.LoginNewsListener
 import ru.thstrio.cinemaforfriend.ui.login.mvi.viewmodel.LoginViewModel
 import ru.thstrio.cinemaforfriend.ui.util.getSelectColor
-import ru.thstrio.cinemaforfriend.ui.util.isValidEmail
-import ru.thstrio.cinemaforfriend.ui.util.isValidPhoneNumber
 import ru.thstrio.cinemaforfriend.ui.util.toVisibility
 import java.util.concurrent.TimeUnit
 
@@ -54,10 +50,9 @@ class LoginActivity : ObservableSourceActivity<LoginUIEvent>(),
         login_btn_sign_up.setOnClickListener { onNext(SelectSingUp) }
 
         login_enter.setOnClickListener { onNext(CreateUserEmail) }
-        login_btn_google.setOnClickListener {
-            loginByGoogle()
+        login_btn_google.setOnClickListener { loginByGoogle() }
+        login_btn_fb.setOnClickListener { //todo verify phone number
         }
-        login_btn_fb.setOnClickListener { verifyPhoneNumber()}
     }
 
     override fun accept(model: LoginViewModel?) {
@@ -90,7 +85,7 @@ class LoginActivity : ObservableSourceActivity<LoginUIEvent>(),
         finish()
     }
 
-    val RC_SIGN_IN = 10001
+    private val RC_SIGN_IN = 10001
     fun loginByGoogle() {
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(getString(R.string.default_web_client_id))
@@ -103,91 +98,19 @@ class LoginActivity : ObservableSourceActivity<LoginUIEvent>(),
 
     public override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-
         // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
         if (requestCode == RC_SIGN_IN) {
             val task = GoogleSignIn.getSignedInAccountFromIntent(data)
             try {
                 // Google Sign In was successful, authenticate with Firebase
                 val account = task.getResult(ApiException::class.java)
-                firebaseAuthWithGoogle(account!!)
+                account?.let { account ->
+                    onNext(LoginByGoogle(account.idToken))
+                }
             } catch (e: ApiException) {
-                // Google Sign In failed, update UI appropriately
-                Log.w("TAG", "Google sign in failed", e)
-                // [START_EXCLUDE]
-                // updateUI(null)
-                // [END_EXCLUDE]
+                //todo onnext error google login
             }
         }
-    }
-
-    private fun firebaseAuthWithGoogle(acct: GoogleSignInAccount) {
-        Log.d("TAG", "firebaseAuthWithGoogle:" + acct.id!!)
-        // [START_EXCLUDE silent]
-        //showProgressBar()
-        // [END_EXCLUDE]
-        val auth = get<FAuth>()
-        val credential = GoogleAuthProvider.getCredential(acct.idToken, null)
-        auth.mAuth.signInWithCredential(credential)
-            .addOnCompleteListener(this) { task ->
-                if (task.isSuccessful) {
-                    // Sign in success, update UI with the signed-in user's information
-                    Log.d("TAG", "signInWithCredential:success")
-                    val user = auth.currentUser
-                    //updateUI(user)
-                } else {
-                    // If sign in fails, display a message to the user.
-                    Log.w("TAG", "signInWithCredential:failure", task.exception)
-                    Snackbar.make(
-                        login_btn_sign_in,
-                        "Authentication Failed.",
-                        Snackbar.LENGTH_SHORT
-                    ).show()
-                    // updateUI(null)
-                }
-
-                // [START_EXCLUDE]
-                // hideProgressBar()
-                // [END_EXCLUDE]
-            }
-    }
-
-
-    fun verifyPhoneNumber() {
-        val auth = get<FAuth>()
-
-        PhoneAuthProvider.getInstance().verifyPhoneNumber(
-            "+79093886555", // Phone number to verify
-            60, // Timeout duration
-            TimeUnit.SECONDS, // Unit of timeout
-            this, // Activity (for callback binding)
-            object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
-                override fun onVerificationCompleted(credential: PhoneAuthCredential) {
-                    auth.mAuth.signInWithCredential(credential)
-                        .addOnCompleteListener(this@LoginActivity) { task ->
-                            if (task.isSuccessful) {
-                                // Sign in success, update UI with the signed-in user's information
-                                Log.d("TAG", "signInWithCredential:success")
-                                val user = auth.currentUser
-                                //updateUI(user)
-                            } else {
-                                // If sign in fails, display a message to the user.
-                                Log.w("TAG", "signInWithCredential:failure", task.exception)
-                                Snackbar.make(
-                                    login_btn_sign_in,
-                                    "Authentication Failed.",
-                                    Snackbar.LENGTH_SHORT
-                                ).show()
-                                // updateUI(null)
-                            }
-                        }
-                }
-
-                override fun onVerificationFailed(p0: FirebaseException) {
-
-                }
-
-            }) // OnVerificationStateChangedCallbacks
     }
 
 }
