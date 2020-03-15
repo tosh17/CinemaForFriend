@@ -1,6 +1,8 @@
 package ru.thstrio.cinemaforfriend.di.coin
 
+
 import org.koin.dsl.module
+import ru.thstrio.cinemaforfriend.api.cache.Cache
 import ru.thstrio.cinemaforfriend.api.tmdb.service.TmdbServise
 import ru.thstrio.cinemaforfriend.firebase.auth.FAuth
 import ru.thstrio.cinemaforfriend.navigation.NavRouter
@@ -18,4 +20,5 @@ val firebaseModule = module {
 }
 val retrofitModule = module {
     single { TmdbServise.instance }
+    single { Cache()}
 }

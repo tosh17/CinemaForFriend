@@ -4,6 +4,10 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'com.google.gms.google-services'
 apply plugin: 'kotlin-kapt'
 
+androidExtensions {
+    experimental = true
+}
+
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.2"
@@ -24,6 +28,14 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    compileOptions {
+        sourceCompatibility = 1.8
+        targetCompatibility = 1.8
+    }
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
+    }
+
 
 }
 ext {
@@ -39,9 +51,14 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'androidx.core:core-ktx:1.2.0'
+    implementation "androidx.collection:collection-ktx:1.1.0"
+    implementation "androidx.fragment:fragment-ktx:1.2.2"
     implementation 'androidx.constraintlayout:constraintlayout:2.0.0-beta4'
+
     implementation 'com.google.android.material:material:1.2.0-alpha05'
     implementation 'com.google.android.gms:play-services-auth:17.0.0'
+
+    implementation "androidx.lifecycle:lifecycle-extensions:2.2.0"
 
     implementation "android.arch.paging:runtime:1.0.1"
 
@@ -52,9 +69,13 @@ dependencies {
     implementation "com.github.badoo.mvicore:mvicore-debugdrawer:$mvicore_version"
 
     // Rx
-    implementation "io.reactivex.rxjava2:rxjava:$rxjava_version"
+    implementation "io.reactivex.rxjava2:rxjava:2.2.10"
     implementation "io.reactivex.rxjava2:rxkotlin:2.2.0"
     implementation "io.reactivex.rxjava2:rxandroid:2.1.1"
+
+    implementation 'com.jakewharton.rxbinding2:rxbinding:2.1.1'
+    implementation 'com.jakewharton.rxbinding2:rxbinding-appcompat-v7:2.1.1'
+    implementation 'com.jakewharton.rxbinding2:rxbinding-recyclerview-v7:2.1.1'
 
     //Koin
     implementation "org.koin:koin-androidx-scope:$koin_version"
@@ -83,5 +104,6 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    implementation 'androidx.palette:palette-ktx:1.0.0'
 
 }

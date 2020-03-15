@@ -1,4 +1,4 @@
-package ru.thstrio.cinemaforfriend.ui.cinema.searchkist
+package ru.thstrio.cinemaforfriend.ui.cinema.searchcinemalist.util
 
 import androidx.recyclerview.widget.DiffUtil
 import ru.thstrio.cinemaforfriend.api.tmdb.pojo.CinemaPojo

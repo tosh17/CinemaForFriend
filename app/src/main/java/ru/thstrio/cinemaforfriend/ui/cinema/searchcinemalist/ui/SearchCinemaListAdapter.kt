@@ -1,4 +1,4 @@
-package ru.thstrio.cinemaforfriend.ui.cinema.searchkist
+package ru.thstrio.cinemaforfriend.ui.cinema.searchcinemalist.ui
 
 
 import android.view.LayoutInflater
@@ -8,15 +8,25 @@ import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import ru.thstrio.cinemaforfriend.R
 import ru.thstrio.cinemaforfriend.api.tmdb.pojo.CinemaPojo
+import ru.thstrio.cinemaforfriend.ui.cinema.searchcinemalist.mvi.SearchCinemaListEvent
+import ru.thstrio.cinemaforfriend.ui.cinema.searchcinemalist.mvi.SearchCinemaListViewModel
+
+import java.lang.ref.WeakReference
 
 
-class SearchCinemaListAdapter(diffCallback: DiffUtil.ItemCallback<CinemaPojo>) :
+class SearchCinemaListAdapter(
+    diffCallback: DiffUtil.ItemCallback<CinemaPojo>,
+    val model: SearchCinemaListViewModel
+) :
     PagedListAdapter<CinemaPojo, SearchCinemaListHolder>(diffCallback) {
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchCinemaListHolder {
         val view: View =
             LayoutInflater.from(parent.context)
                 .inflate(R.layout.search_cinema_list_item, parent, false)
-        return SearchCinemaListHolder(view)
+        return SearchCinemaListHolder(
+            view
+        )
     }
 
     override fun onBindViewHolder(holder: SearchCinemaListHolder, position: Int) {
@@ -32,10 +42,11 @@ class SearchCinemaListAdapter(diffCallback: DiffUtil.ItemCallback<CinemaPojo>) :
                 setDescription(item.overview)
                 setRate("${item.voteAverage}/${item.voteCount}")
             }
+            holder.view.setOnClickListener {
+                model.doAction((SearchCinemaListEvent.ClickCinemaItem(item.id)))
+            }
+
         }
-
-
     }
-
-
 }
+

@@ -5,4 +5,7 @@
     <color name="colorAccent">#03DAC5</color>
     <color name="link_active">#3700B3</color>
     <color name="link_notactive">#C3C3C3</color>
+
+    <color name="text_title">#020202</color>
+    text_title
 </resources>

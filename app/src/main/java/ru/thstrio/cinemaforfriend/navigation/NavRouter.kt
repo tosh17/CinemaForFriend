@@ -16,17 +16,23 @@ class NavRouter {
     }
 
     fun initChain() {
-        router.newRootScreen(SearchListCinemaScreen())
+        router.newRootScreen( SearchListCinemaScreen())
+       // router.newRootScreen(InfoCinemaScreen(454626L))
     }
 
-    fun goTo(screen: Screens) {
+    fun goTo(screen: Screens, data: Any? = null) {
         router.navigateTo(
             when (screen) {
                 Screens.Me -> MeScreen()
                 Screens.Lenta -> LentaScreen()
                 Screens.SearchListCinema -> SearchListCinemaScreen()
+                Screens.InfoCinema -> InfoCinemaScreen(data as Long)
             }
         )
 
+    }
+
+    fun removeNavigator() {
+        navigator.removeNavigator()
     }
 }

@@ -1,4 +1,4 @@
-package ru.thstrio.cinemaforfriend.ui.cinema.searchkist
+package ru.thstrio.cinemaforfriend.ui.cinema.searchcinemalist.ui
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView

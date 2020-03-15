@@ -1,16 +1,14 @@
 package ru.thstrio.cinemaforfriend.ui.login.mvi.feature
 
 import android.os.Parcelable
-import android.util.Log
 import com.badoo.mvicore.feature.ActorReducerFeature
-import com.badoo.mvicore.element.TimeCapsule.*
+
 import com.badoo.mvicore.element.Actor
-import com.badoo.mvicore.element.Bootstrapper
+
 import com.badoo.mvicore.element.NewsPublisher
 import com.badoo.mvicore.element.Reducer
 import com.badoo.mvicore.element.TimeCapsule
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount
-import com.google.firebase.auth.GoogleAuthProvider
+
 
 import ru.thstrio.cinemaforfriend.ui.login.mvi.feature.LoginActorFeature.Wish
 import ru.thstrio.cinemaforfriend.ui.login.mvi.feature.LoginActorFeature.State
@@ -18,10 +16,10 @@ import ru.thstrio.cinemaforfriend.ui.login.mvi.feature.LoginActorFeature.News
 import ru.thstrio.cinemaforfriend.ui.login.mvi.feature.LoginActorFeature.Effect
 
 import io.reactivex.Observable
-import io.reactivex.Observable.just
+
 import io.reactivex.android.schedulers.AndroidSchedulers
 import kotlinx.android.parcel.Parcelize
-import org.koin.android.ext.android.get
+
 
 import org.koin.core.KoinComponent
 import org.koin.core.inject
