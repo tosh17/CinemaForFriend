@@ -4,6 +4,7 @@ package ru.thstrio.cinemaforfriend.ui.cinema.searchcinemalist.ui
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.paging.PagedList
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import ru.thstrio.cinemaforfriend.R
@@ -27,6 +28,10 @@ class SearchCinemaListAdapter(
         return SearchCinemaListHolder(
             view
         )
+    }
+
+    override fun getItem(position: Int): CinemaPojo? {
+        return super.getItem(position)
     }
 
     override fun onBindViewHolder(holder: SearchCinemaListHolder, position: Int) {

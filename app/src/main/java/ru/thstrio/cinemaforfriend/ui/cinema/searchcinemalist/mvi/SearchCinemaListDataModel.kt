@@ -8,6 +8,7 @@ import ru.thstrio.cinemaforfriend.api.cache.Cache
 import ru.thstrio.cinemaforfriend.mvi.model.MviDataModel
 import ru.thstrio.cinemaforfriend.ui.cinema.searchcinemalist.mvi.SearchCinemaListActionEffect.*
 import ru.thstrio.cinemaforfriend.ui.cinema.searchcinemalist.mvi.SearchCinemaListActionEffect.SearchCinemaListEffect.*
+import java.util.concurrent.TimeUnit
 
 class SearchCinemaListDataModel :
     MviDataModel<SearchCinemaListState, SearchCinemaListEvent, SearchCinemaListActionEffect>(),
@@ -28,10 +29,10 @@ class SearchCinemaListDataModel :
             SaveCurrentPosition(event.position)
         )
         is SearchCinemaListEvent.ClickCinemaItem -> Observable.just(
-            SearchCinemaListNews.OpenCinema(
-                event.id
-            )
+            SearchCinemaListNews.OpenCinema(                event.id            )
         )
+        SearchCinemaListEvent.RwToScroll -> Observable.just(
+            SearchCinemaListNews.RwScroll(state.currentPosition)).debounce (100,TimeUnit.MILLISECONDS)
     }.doOnError { error -> SearchCinemaListNews.ShowError(error.message.orEmpty()) }
         .map { it as SearchCinemaListActionEffect }
 

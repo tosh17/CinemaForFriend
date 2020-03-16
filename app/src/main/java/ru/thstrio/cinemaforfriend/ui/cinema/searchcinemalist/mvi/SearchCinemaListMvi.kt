@@ -22,7 +22,7 @@ sealed class SearchCinemaListEvent : MviUiEvent {
     object LoadNextPage : SearchCinemaListEvent()
     data class SaveCurrentPosition(val position: Int) : SearchCinemaListEvent()
     data class ClickCinemaItem(val id: Long) : SearchCinemaListEvent()
-
+    object RwToScroll : SearchCinemaListEvent()
 }
 
 sealed class SearchCinemaListActionEffect : MviAction {
@@ -42,6 +42,7 @@ sealed class SearchCinemaListActionEffect : MviAction {
     sealed class SearchCinemaListNews : SearchCinemaListActionEffect(), MviNews {
         data class OpenCinema(val id: Long) : SearchCinemaListNews()
         data class ShowError(val message: String) : SearchCinemaListNews()
+        data class RwScroll(val position: Int) : SearchCinemaListNews()
     }
 }
 

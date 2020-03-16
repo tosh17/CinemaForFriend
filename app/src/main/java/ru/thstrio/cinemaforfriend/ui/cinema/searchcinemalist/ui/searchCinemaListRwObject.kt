@@ -4,6 +4,7 @@ import android.os.Handler
 import android.os.Looper
 import androidx.paging.PagedList
 import androidx.paging.PositionalDataSource
+import androidx.recyclerview.widget.RecyclerView
 import io.reactivex.disposables.Disposable
 import io.reactivex.subjects.PublishSubject
 import ru.thstrio.cinemaforfriend.api.tmdb.pojo.CinemaPojo
@@ -13,7 +14,7 @@ import ru.thstrio.cinemaforfriend.ui.cinema.searchcinemalist.mvi.SearchCinemaLis
 import ru.thstrio.cinemaforfriend.ui.cinema.searchcinemalist.mvi.SearchCinemaListState
 
 fun createPageList(
-    position: Int,
+    position: Int, rw:RecyclerView,
     sourceSubject: PublishSubject<List<CinemaPojo>>,
     view: MviUi<SearchCinemaListState, SearchCinemaListEvent, SearchCinemaListActionEffect.SearchCinemaListNews>
     ): PagedList<CinemaPojo> {
@@ -41,8 +42,9 @@ fun createPageList(
         ) {
 
             subsr = sourceSubject.subscribe { data ->
-                callback.onResult(data, position)
+                callback.onResult(data, 0)
                 subsr?.dispose()
+                view.onNextEvent((SearchCinemaListEvent.RwToScroll))
             }
             view.onNextEvent(SearchCinemaListEvent.LoadFirstPage)
         }
