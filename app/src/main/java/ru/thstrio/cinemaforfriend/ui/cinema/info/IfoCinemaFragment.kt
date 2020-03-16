@@ -25,11 +25,12 @@ import ru.thstrio.cinemaforfriend.R
 import ru.thstrio.cinemaforfriend.api.tmdb.util.getTmDbImageLink500
 import ru.thstrio.cinemaforfriend.mvi.model.MviModel
 import ru.thstrio.cinemaforfriend.mvi.ui.MviFragment
+import ru.thstrio.cinemaforfriend.ui.cinema.info.mvi.InfoCinemaEffectAction
 import ru.thstrio.cinemaforfriend.ui.cinema.info.mvi.InfoCinemaState
 import ru.thstrio.cinemaforfriend.ui.cinema.info.mvi.InfoCinemaUiEvent
 import ru.thstrio.cinemaforfriend.ui.cinema.info.mvi.InfoCinemaViewModal
 
-class IfoCinemaFragment : MviFragment<InfoCinemaState, InfoCinemaUiEvent>() {
+class IfoCinemaFragment : MviFragment<InfoCinemaState, InfoCinemaUiEvent, InfoCinemaEffectAction.InfoCinemaNews>() {
     companion object {
         val argDataName = "id"
     }
@@ -47,7 +48,7 @@ class IfoCinemaFragment : MviFragment<InfoCinemaState, InfoCinemaUiEvent>() {
         return view
     }
 
-    override fun getModel(): MviModel<InfoCinemaState, InfoCinemaUiEvent> = model
+    override fun getModel(): MviModel<InfoCinemaState, InfoCinemaUiEvent, InfoCinemaEffectAction.InfoCinemaNews> = model
 
     override fun onUpdateUi(state: InfoCinemaState) {
         Log.d("TExt", "cinema " + state.cinema.toString())
@@ -55,7 +56,7 @@ class IfoCinemaFragment : MviFragment<InfoCinemaState, InfoCinemaUiEvent>() {
         val cinema = state.cinema!!
         requireView().run {
             info_cinema_title.text = cinema.title
-            info_cinema_data.text="(${cinema.releaseDate.split("-")[0]})"
+            info_cinema_data.text = "(${cinema.releaseDate.split("-")[0]})"
             info_cinema_description.text = cinema.overview
             cinema.posterPath?.let { path ->
                 Glide
@@ -72,39 +73,45 @@ class IfoCinemaFragment : MviFragment<InfoCinemaState, InfoCinemaUiEvent>() {
         }
     }
 
-   val colorCalc=object : RequestListener<Bitmap>{
-       override fun onLoadFailed(
-           e: GlideException?,
-           model: Any?,
-           target: Target<Bitmap>?,
-           isFirstResource: Boolean
-       ): Boolean {
-           return false
-       }
+    val colorCalc = object : RequestListener<Bitmap> {
+        override fun onLoadFailed(
+            e: GlideException?,
+            model: Any?,
+            target: Target<Bitmap>?,
+            isFirstResource: Boolean
+        ): Boolean {
+            return false
+        }
 
-       override fun onResourceReady(
-           resource: Bitmap,
-           model: Any?,
-           target: Target<Bitmap>?,
-           dataSource: DataSource?,
-           isFirstResource: Boolean
-       ): Boolean {
-           Palette.from(resource).generate { palette ->
-               palette?.dominantSwatch?.let {changeCollor(it)
-               }
-           }
-           return false
-       }
+        override fun onResourceReady(
+            resource: Bitmap,
+            model: Any?,
+            target: Target<Bitmap>?,
+            dataSource: DataSource?,
+            isFirstResource: Boolean
+        ): Boolean {
+            Palette.from(resource).generate { palette ->
+                palette?.dominantSwatch?.let {
+                    changeCollor(it)
+                }
+            }
+            return false
+        }
 
-   }
+    }
 
     private fun changeCollor(color: Palette.Swatch) {
+        view?.run {
+            info_cinema_share.setColorFilter(color.titleTextColor, PorterDuff.Mode.MULTIPLY)
+            info_cinema_bg2.setColorFilter(color.rgb, PorterDuff.Mode.MULTIPLY)
+            info_cinema_title.setTextColor(color.titleTextColor)
+            info_cinema_description.setTextColor(color.bodyTextColor)
+        }
 
-        requireView().info_cinema_share.setColorFilter(color.titleTextColor, PorterDuff.Mode.MULTIPLY)
-        requireView().info_cinema_bg2.setColorFilter(color.rgb, PorterDuff.Mode.MULTIPLY)
+    }
 
-        requireView(). info_cinema_title.setTextColor(color.titleTextColor)
-        requireView(). info_cinema_description.setTextColor(color.bodyTextColor)
+    override fun onNextNews(news: InfoCinemaEffectAction.InfoCinemaNews) = when(news){
+        is InfoCinemaEffectAction.InfoCinemaNews.showEroor -> TODO()
     }
 
 }

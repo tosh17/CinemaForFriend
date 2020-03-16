@@ -43,8 +43,9 @@ class SearchCinemaListAdapter(
                 setRate("${item.voteAverage}/${item.voteCount}")
             }
             holder.view.setOnClickListener {
-                model.doAction((SearchCinemaListEvent.ClickCinemaItem(item.id)))
+                model.onNextUiEvent((SearchCinemaListEvent.ClickCinemaItem(item.id)))
             }
+            holder.setNumber(position)
 
         }
     }

@@ -22,6 +22,9 @@ class SearchCinemaListHolder(val view: View) : RecyclerView.ViewHolder(view) {
  fun setLogoError(){
      view.search_cinema_item_logo.setImageResource(R.drawable.error_image)
  }
+    fun setNumber(number:Int){
+        view.search_cinema_item_number.text="#$number"
+    }
     fun setDescription(text:String){ view.search_cinema_item_description.text=text}
     fun setRate(text:String){view.search_cinema_item_rate.text=text}
 }
