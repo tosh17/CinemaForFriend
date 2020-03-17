@@ -142,7 +142,7 @@ class SearchCinemaListFragment :
 
     fun getListCurrentPosition(): Int {
         val layoutManager = view?.search_cinema_list_rw?.layoutManager
-        return if (layoutManager != null) (layoutManager as LinearLayoutManager).findLastVisibleItemPosition() else 0
+        return if (layoutManager != null) (layoutManager as LinearLayoutManager).findFirstVisibleItemPosition() else 0
     }
 
     override fun getModel(): MviModel<SearchCinemaListState, SearchCinemaListEvent, SearchCinemaListActionEffect.SearchCinemaListNews> {

@@ -1,11 +1,13 @@
 package ru.thstrio.cinemaforfriend
 
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.android.ext.android.get
 import ru.terrakok.cicerone.android.support.SupportAppNavigator
+import ru.thstrio.cinemaforfriend.firebase.dynamiclink.FDynamicLink
 import ru.thstrio.cinemaforfriend.navigation.NavRouter
 import ru.thstrio.cinemaforfriend.navigation.Screens
 
@@ -16,6 +18,7 @@ class MainActivity : FragmentActivity(){
         setContentView(R.layout.activity_main)
         router = get()
        if(savedInstanceState==null) router.initChain()
+
     }
 
     override fun onResume() {
